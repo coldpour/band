@@ -1,4 +1,4 @@
-upcoming:
+shows:
   - date: "2025-03-12"
     city: "Seattle, WA"
     venue: "The Neptune"
@@ -19,8 +19,6 @@ upcoming:
     venue: "The Wiltern"
     time: "8:00 PM"
     tickets: "https://www.livenation.com"
-
-past:
   - date: "2024-11-02"
     city: "Austin, TX"
     venue: "Mohawk"

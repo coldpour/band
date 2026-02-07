@@ -51,16 +51,27 @@ const renderShows = (shows) => {
   });
 };
 
+const parseShowDate = (dateString) => new Date(`${dateString}T00:00:00`);
+
 const loadShows = async () => {
   const response = await fetch("shows.yaml");
   const yamlText = await response.text();
   const data = jsyaml.load(yamlText);
   const page = document.body.dataset.page;
+  const shows = Array.isArray(data) ? data : data.shows || [];
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
 
   if (page === "past") {
-    renderShows(data.past || []);
+    const pastShows = shows
+      .filter((show) => parseShowDate(show.date) < today)
+      .sort((a, b) => parseShowDate(b.date) - parseShowDate(a.date));
+    renderShows(pastShows);
   } else {
-    renderShows(data.upcoming || []);
+    const upcomingShows = shows
+      .filter((show) => parseShowDate(show.date) >= today)
+      .sort((a, b) => parseShowDate(a.date) - parseShowDate(b.date));
+    renderShows(upcomingShows);
   }
 };
 
