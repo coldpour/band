@@ -37,7 +37,7 @@ const buildShowCard = (show) => {
   } else {
     const span = document.createElement("span");
     span.className = "show__note";
-    span.textContent = "Thank you for the energy";
+    span.textContent = show.note || "Thank you for the energy";
     card.append(span);
   }
 
@@ -53,12 +53,45 @@ const renderShows = (shows) => {
 
 const parseShowDate = (dateString) => new Date(`${dateString}T00:00:00`);
 
+const parseShowsText = (text) =>
+  text
+    .trim()
+    .split(/\n\s*\n/)
+    .map((block) => block.split("\n").map((line) => line.trim()))
+    .map((lines) => lines.filter(Boolean))
+    .filter((lines) => lines.length > 0)
+    .map((lines) => {
+      const show = {};
+      lines.forEach((line) => {
+        if (!show.date && /^\d{4}-\d{2}-\d{2}$/.test(line)) {
+          show.date = line;
+        } else if (!show.tickets && /^https?:\/\//i.test(line)) {
+          show.tickets = line;
+        } else if (!show.time && /\b\d{1,2}:\d{2}\s?(AM|PM)\b/i.test(line)) {
+          show.time = line;
+        } else if (
+          !show.note &&
+          /\b(all ages|all-ages|18\+|21\+)\b/i.test(line)
+        ) {
+          show.note = line;
+        } else if (!show.city && /,/.test(line)) {
+          show.city = line;
+        } else if (!show.venue) {
+          show.venue = line;
+        } else if (!show.city) {
+          show.city = line;
+        } else if (!show.note) {
+          show.note = line;
+        }
+      });
+      return show;
+    });
+
 const loadShows = async () => {
-  const response = await fetch("shows.yaml");
-  const yamlText = await response.text();
-  const data = jsyaml.load(yamlText);
+  const response = await fetch("shows.txt");
+  const showsText = await response.text();
+  const shows = parseShowsText(showsText);
   const page = document.body.dataset.page;
-  const shows = Array.isArray(data) ? data : data.shows || [];
   const today = new Date();
   today.setHours(0, 0, 0, 0);
 
