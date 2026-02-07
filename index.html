@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Red Karma 13 | Modern Psychedelic Rock</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body data-page="upcoming">
+    <header class="hero">
+      <video class="hero__video" autoplay muted loop playsinline poster="https://images.unsplash.com/photo-1511379938547-c1f69419868d?auto=format&fit=crop&w=1600&q=80">
+        <source
+          src="https://storage.coverr.co/videos/coverr-concert-lights-3458/1080p.mp4"
+          type="video/mp4"
+        />
+      </video>
+      <div class="hero__overlay"></div>
+      <nav class="nav">
+        <a class="nav__logo" href="index.html">Red Karma 13</a>
+        <div class="nav__links">
+          <a href="#bio">Bio</a>
+          <a href="#shows">Shows</a>
+          <a href="#connect">Connect</a>
+        </div>
+      </nav>
+      <div class="hero__content">
+        <p class="hero__tag">Modern Psychedelic Rock</p>
+        <h1>Red Karma 13</h1>
+        <p>
+          A cinematic blend of analog synths, fuzzed-out guitars, and velvet vocals
+          sculpted for midnight drives and festival sunsets.
+        </p>
+        <div class="hero__actions">
+          <a class="button" href="#shows">Upcoming Shows</a>
+          <a class="button button--ghost" href="#connect">Join the Tribe</a>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section id="bio" class="section section--bio">
+        <div class="section__content">
+          <h2>Bio</h2>
+          <p>
+            Red Karma 13 is a five-piece band pushing the edges of modern rock with
+            pulsating grooves, hazy cinematic textures, and anthemic hooks. Their live
+            shows feel like a deep-space ritual: immersive visuals, hypnotic rhythms,
+            and a wall of sound that begs you to move.
+          </p>
+          <p>
+            Drawing inspiration from desert psych, city neon, and late-night radio,
+            the band builds songs that travel from introspective calm to cathartic
+            release. Every set is designed to make you feel part of the story.
+          </p>
+        </div>
+        <div class="section__card">
+          <h3>Latest Release</h3>
+          <p>"Orbiting Fire" — available everywhere now.</p>
+          <a class="button button--small" href="https://open.spotify.com" target="_blank" rel="noreferrer">Listen</a>
+        </div>
+      </section>
+
+      <section id="shows" class="section section--shows">
+        <div class="section__content">
+          <h2>Upcoming Shows</h2>
+          <p>Catch the next chapter of the Red Karma 13 live ritual.</p>
+        </div>
+        <div id="shows-list" class="shows"></div>
+        <div class="section__footer">
+          <a class="button button--ghost" href="past-shows.html">View past shows</a>
+        </div>
+      </section>
+
+      <section id="connect" class="section section--connect">
+        <div class="connect__grid">
+          <div class="connect__card">
+            <h2>Merch</h2>
+            <p>Limited vinyl, hand-dyed tees, and tour posters.</p>
+            <a class="button" href="https://bandcamp.com" target="_blank" rel="noreferrer">Shop merch</a>
+          </div>
+          <div class="connect__card">
+            <h2>Social</h2>
+            <ul class="social">
+              <li><a href="https://instagram.com" target="_blank" rel="noreferrer">Instagram</a></li>
+              <li><a href="https://tiktok.com" target="_blank" rel="noreferrer">TikTok</a></li>
+              <li><a href="https://youtube.com" target="_blank" rel="noreferrer">YouTube</a></li>
+            </ul>
+          </div>
+          <div class="connect__card">
+            <h2>Mailing List</h2>
+            <p>Get set lists, early ticket access, and behind-the-scenes updates.</p>
+            <form class="form" name="mailing-list" method="POST" data-netlify="true">
+              <input type="hidden" name="form-name" value="mailing-list" />
+              <label>
+                Email address
+                <input type="email" name="email" placeholder="you@email.com" required />
+              </label>
+              <button class="button button--small" type="submit">Sign up</button>
+            </form>
+          </div>
+          <div class="connect__card">
+            <h2>Booking</h2>
+            <p>For festivals, tour support, or private events.</p>
+            <a class="button" href="mailto:booking@redkarma13.com">booking@redkarma13.com</a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <p>© 2025 Red Karma 13. All rights reserved.</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/js-yaml@4.1.0/dist/js-yaml.min.js"></script>
+    <script src="scripts.js"></script>
+  </body>
+</html>
