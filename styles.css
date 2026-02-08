@@ -196,8 +196,10 @@ a {
   color: var(--primary);
 }
 
-.show__details h3 {
-  margin-bottom: 0.25rem;
+.show__venue {
+  margin-bottom: 0.35rem;
+  font-size: 1.35rem;
+  font-weight: 700;
 }
 
 .show__note {

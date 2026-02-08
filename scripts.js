@@ -9,7 +9,7 @@ const formatDate = (dateString) => {
   }).format(date);
 };
 
-const buildShowCard = (show) => {
+const buildShowCard = (show, { showTickets = true } = {}) => {
   const card = document.createElement("article");
   card.className = "show";
 
@@ -19,14 +19,22 @@ const buildShowCard = (show) => {
 
   const details = document.createElement("div");
   details.className = "show__details";
-  details.innerHTML = `
-    <h3>${show.city}</h3>
-    <p>${show.venue} · ${show.time}</p>
-  `;
+  const venue = document.createElement("h3");
+  venue.className = "show__venue";
+  venue.textContent = show.venue || "";
+
+  const locationLine = [show.city, show.time].filter(Boolean).join(" · ");
+  const location = document.createElement("p");
+  location.textContent = locationLine;
+
+  details.append(venue);
+  if (locationLine) {
+    details.append(location);
+  }
 
   card.append(date, details);
 
-  if (show.tickets) {
+  if (show.tickets && showTickets) {
     const link = document.createElement("a");
     link.className = "button button--small";
     link.href = show.tickets;
@@ -34,20 +42,22 @@ const buildShowCard = (show) => {
     link.rel = "noreferrer";
     link.textContent = "Tickets";
     card.append(link);
-  } else {
+  }
+
+  if (show.note) {
     const span = document.createElement("span");
     span.className = "show__note";
-    span.textContent = show.note || "Thank you for the energy";
+    span.textContent = show.note;
     card.append(span);
   }
 
   return card;
 };
 
-const renderShows = (shows) => {
+const renderShows = (shows, options) => {
   showsList.innerHTML = "";
   shows.forEach((show) => {
-    showsList.append(buildShowCard(show));
+    showsList.append(buildShowCard(show, options));
   });
 };
 
@@ -99,12 +109,12 @@ const loadShows = async () => {
     const pastShows = shows
       .filter((show) => parseShowDate(show.date) < today)
       .sort((a, b) => parseShowDate(b.date) - parseShowDate(a.date));
-    renderShows(pastShows);
+    renderShows(pastShows, { showTickets: false });
   } else {
     const upcomingShows = shows
       .filter((show) => parseShowDate(show.date) >= today)
       .sort((a, b) => parseShowDate(a.date) - parseShowDate(b.date));
-    renderShows(upcomingShows);
+    renderShows(upcomingShows, { showTickets: true });
   }
 };
 
